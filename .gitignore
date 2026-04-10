@@ -1,2 +1,5 @@
-./*.tex
-./src/eco_adaptive_home_storage_notebook.ipynb
+
+*.tex
+/*.tex
+
+src/eco_adaptive_home_storage_notebook.ipynb
