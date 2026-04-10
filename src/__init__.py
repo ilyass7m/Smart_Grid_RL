@@ -5,15 +5,26 @@ Eco-Adaptive Home Storage: Multi-Objective RL for Smart Grid Energy Management
 A reinforcement learning project for intelligent battery arbitrage in smart homes.
 
 Modules:
-    environment: SmartGridEnv - Gymnasium-compatible environment
-    dqn_agent: DQNAgent - Deep Q-Network implementation
-    baseline_agent: Rule-based baseline agents
-    train: Training and evaluation utilities
+    rl_glue: RL-GLUE framework (BaseAgent, BaseEnvironment, RLGlue)
+    smart_grid_env: SmartGridEnvironment - RL-GLUE compatible environment
+    agents: All agents (DQN, SARSA, Greedy, EcoGreedy, Threshold, Random, Idle)
+    sarsa_agent: SARSA agents with tile coding (no PyTorch required)
+    experiment: Training, evaluation, and visualization utilities
 """
 
-from .environment import SmartGridEnv
-from .dqn_agent import DQNAgent
-from .baseline_agent import GreedyAgent, EcoGreedyAgent, ThresholdAgent, RandomAgent
+from .rl_glue import RLGlue, BaseAgent, BaseEnvironment
+from .smart_grid_env import SmartGridEnvironment
+from .agents import (
+    GreedyAgent, EcoGreedyAgent, ThresholdAgent,
+    RandomAgent, IdleAgent, get_agent, create_agent
+)
+from .sarsa_agent import SarsaAgent, ExpectedSarsaAgent
 
-__version__ = "1.0.0"
+# DQN requires PyTorch
+try:
+    from .agents import DQNAgent
+except ImportError:
+    DQNAgent = None
+
+__version__ = "2.1.0"
 __author__ = "Adam Younsi, Ilyas Madah, Zaid El Kasemy"
